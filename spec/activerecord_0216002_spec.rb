@@ -12,12 +12,11 @@ class User < ActiveRecord::Base
 end
 
 RSpec.describe "Test User" do
-  # before(:all)do
-  #   User.new(name: 'Ancestor', phone: '0932445631', age: 12).save
-  # end
+  before(:all)do
+    User.new(name: 'Ancestor', phone: '0932445631', age: 12).save
+  end
 
   it '1 test model with attrbutes' do
-    # byebug
     user = User.new(name: 'Bob', phone: '0932445631', age: 12)
     expect(user.name).to eq('Bob')
     expect(user.phone).to eq('0932445631')
@@ -26,6 +25,7 @@ RSpec.describe "Test User" do
 
   it '2 test model save record' do
     user = User.new(name: 'Bob')
+    # byebug
     expect{user.save}.to change{User.all.count}.by(1)
     expect{user.save}.to change{User.all.count}.by(0)
   end
@@ -35,16 +35,16 @@ RSpec.describe "Test User" do
     expect(User.last.name).to eq('Peter')
   end
 
-  it '3 test find' do
-    user = User.find(User.first.id)
-    expect(user.id).to eq(User.first.id)
-  end
+  # it '3 test find' do
+  #   user = User.find(User.first.id)
+  #   expect(user.id).to eq(User.first.id)
+  # end
 
-  it '4 test where chain' do
-    User.new(name: 'A', age: 20, phone: '000').save
-    User.new(name: 'A', age: 30, phone: '6666').save
-    User.new(name: 'B', age: 30, phone: '000').save
-    user = User.where("name = 'A'").where("age > 25").where("age > 25").where("age > 25").first
-    expect(user.phone).to eq('6666')
-  end
+  # it '4 test where chain' do
+  #   User.new(name: 'A', age: 20, phone: '000').save
+  #   User.new(name: 'A', age: 30, phone: '6666').save
+  #   User.new(name: 'B', age: 30, phone: '000').save
+  #   user = User.where("name = 'A'").where("age > 25").where("age > 25").where("age > 25").first
+  #   expect(user.phone).to eq('6666')
+  # end
 end

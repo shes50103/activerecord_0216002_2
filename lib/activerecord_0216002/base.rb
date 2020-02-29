@@ -6,6 +6,22 @@ module ActiveRecord
     def initialize(attributes)
       self.class.set_columns
       @attributes = attributes
+      @new_record = true
+    end
+
+    def save
+      if new_record?
+        sql = "INSERT INTO users (#{@attributes.keys.join(',')}) VALUES ('#{@attributes.values.join("','")}')"
+        self.class.connection.execute(sql)
+        @new_record = false
+        true
+      else
+        false
+      end
+    end
+
+    def new_record?
+      @new_record
     end
 
 
@@ -42,6 +58,16 @@ module ActiveRecord
         define_method "#{name}=" do |value|
           @attributes[name] = value
         end
+      end
+
+      def all
+        self.connection.execute("SELECT * FROM users").map do |h|
+          new(h)
+        end
+      end
+
+      def last
+        all.last
       end
     end
   end
