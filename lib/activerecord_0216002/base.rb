@@ -72,7 +72,6 @@ module ActiveRecord
         all.first
       end
 
-
       def find(id)
         find_by_sql("SELECT * FROM users WHERE id=#{id}").first
       end
@@ -81,6 +80,10 @@ module ActiveRecord
         self.connection.execute(sql).map do |h|
           new(h)
         end
+      end
+
+      def where(data)
+        Relation.new(self).where(data)
       end
     end
   end

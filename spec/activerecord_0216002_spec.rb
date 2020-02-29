@@ -40,11 +40,11 @@ RSpec.describe "Test User" do
     expect(user.id).to eq(User.first.id)
   end
 
-  # it '4 test where chain' do
-  #   User.new(name: 'A', age: 20, phone: '000').save
-  #   User.new(name: 'A', age: 30, phone: '6666').save
-  #   User.new(name: 'B', age: 30, phone: '000').save
-  #   user = User.where("name = 'A'").where("age > 25").where("age > 25").where("age > 25").first
-  #   expect(user.phone).to eq('6666')
-  # end
+  it '4 test where chain' do
+    User.new(name: 'A', age: 20, phone: '000').save
+    User.new(name: 'A', age: 30, phone: '6666').save
+    User.new(name: 'B', age: 30, phone: '000').save
+    user = User.where("name = 'A'").where("age > 25").where("age > 25").where("age > 25").first
+    expect(user.phone).to eq('6666')
+  end
 end
