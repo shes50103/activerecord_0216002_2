@@ -52,7 +52,7 @@ module ActiveRecord
 
       def define_attr_method(name)
         define_method name do
-          @attributes[name] || @attributes[name.to_sym]
+          @attributes["#{name}"] || @attributes[name.to_sym]
         end
 
         define_method "#{name}=" do |value|
@@ -61,13 +61,26 @@ module ActiveRecord
       end
 
       def all
-        self.connection.execute("SELECT * FROM users").map do |h|
-          new(h)
-        end
+        find_by_sql("SELECT * FROM users")
       end
 
       def last
         all.last
+      end
+
+      def first
+        all.first
+      end
+
+
+      def find(id)
+        find_by_sql("SELECT * FROM users WHERE id=#{id}").first
+      end
+
+      def find_by_sql(sql)
+        self.connection.execute(sql).map do |h|
+          new(h)
+        end
       end
     end
   end

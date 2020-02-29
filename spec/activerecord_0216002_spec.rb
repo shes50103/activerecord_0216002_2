@@ -35,10 +35,10 @@ RSpec.describe "Test User" do
     expect(User.last.name).to eq('Peter')
   end
 
-  # it '3 test find' do
-  #   user = User.find(User.first.id)
-  #   expect(user.id).to eq(User.first.id)
-  # end
+  it '3 test find' do
+    user = User.find(User.first.id)
+    expect(user.id).to eq(User.first.id)
+  end
 
   # it '4 test where chain' do
   #   User.new(name: 'A', age: 20, phone: '000').save
