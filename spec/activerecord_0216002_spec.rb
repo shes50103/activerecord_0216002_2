@@ -12,11 +12,12 @@ class User < ActiveRecord::Base
 end
 
 RSpec.describe "Test User" do
-  before(:all)do
-    User.new(name: 'Ancestor', phone: '0932445631', age: 12).save
-  end
+  # before(:all)do
+  #   User.new(name: 'Ancestor', phone: '0932445631', age: 12).save
+  # end
 
   it '1 test model with attrbutes' do
+    # byebug
     user = User.new(name: 'Bob', phone: '0932445631', age: 12)
     expect(user.name).to eq('Bob')
     expect(user.phone).to eq('0932445631')
